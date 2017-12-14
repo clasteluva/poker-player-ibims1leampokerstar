@@ -16,10 +16,13 @@ class Player {
 
     if(my1Card["rank"] == my2Card["rank"]) {
         console.log("#### pair!!");
-        callValue += 50;
-        if(my1Card["rank"] == "K" || my1Card["rank"] == "A" || my1Card["rank"] == "Q") {
-          console.log("#### pair with KAQ");
-          callValue += 150;
+
+        if(my1Card.rank > 8 ) {
+          callValue += 50;
+          if(my1Card["rank"] == "K" || my1Card["rank"] == "A" || my1Card["rank"] == "Q") {
+            console.log("#### pair with KAQ");
+            callValue += 150;
+          }
         }
     } else {
       if(my1Card.rank <= 8 || my2Card.rank <= 8) {
