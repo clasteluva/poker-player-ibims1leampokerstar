@@ -15,7 +15,7 @@ class Player {
     var my2Card = gameState["players"][inAction]["hole_cards"][1];
 
     var cardCount = gameState.community_cards.length;
-    var comCards = new Array[4];
+    var comCards = new Array(5);
 
     var i;
     for(i = 0; i < cardCount; i++) {
