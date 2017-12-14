@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.106';
+    return '0.107';
   }
 
   static betRequest(gameState, bet) {
@@ -116,10 +116,10 @@ class Player {
     console.log("#### our cards are "+my1Card.rank+" "+my1Card.suit+", "+my2Card.rank+" "+my2Card.suit);
     console.log("#### We bet now: "+callValue+" our stack is: "+gameState.players[inAction].stack+" stack-callvalue "+gameState.players[inAction].stack - callValue);
     
-    if(ALL_IN == false && ((gameState.players[inAction].stack - callValue) <= 200)) {
+    /*if(ALL_IN == false && ((gameState.players[inAction].stack - callValue) <= 200)) {
       console.log("##### wir haben zu wenig geld");
       callValue = 0;
-    }
+    }*/
 
     bet(callValue);
   }
