@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.31';
+    return '0.32';
   }
 
   static betRequest(gameState, bet) {
@@ -17,18 +17,17 @@ class Player {
     //PAIR
     if(my1Card["rank"] == my2Card["rank"]) {
 
-        if(my1Card.rank > 8 ) {
+        if(my1Card.rank > 8 ) { //good pair
           callValue += (50 + minimumRaise);
-          if(my1Card["rank"] == "K" || my1Card["rank"] == "A" || my1Card["rank"] == "Q") {
+          if(my1Card["rank"] == "K" || my1Card["rank"] == "A" || my1Card["rank"] == "Q") { //very good pair
             callValue += 150;
           }
         }
-    } else {
-      if(my1Card.rank <= 8 || my2Card.rank <= 8) {
+    } 
 
-        console.log("### call is zerooo");
-        callValue = 0;
-      }
+    if(my1Card.rank <= 8 || my2Card.rank <= 8) { //bad cards - no matter if 2 2 or 4 K
+      console.log("### call is zerooo");
+      callValue = 0;
     }
 
     // A UND K
@@ -38,6 +37,29 @@ class Player {
 
       if(my1Card.suit == my2Card.suit) {
         callValue += 100;
+      }
+    }
+
+    var cardCount = gameState.community_cards.length;
+    var com1;
+    var com2;
+    var com3;
+    var com4;
+    var com5;
+
+    for(i = 0; i < cardCount; i++) {
+      console.log("### cardcount: " + cardCount);
+
+      if(cardCount > 0) {
+        com1 = gameState.community_cards[0];
+        com2 = gameState.community_cards[1];
+        com3 = gameState.community_cards[2];
+      }
+      if(cardCount > 3) {
+        com4 = gameState.community_cards[3];
+      }
+      if(cardCount > 4) {
+        com5 = gameState.community_cards[4];
       }
     }
 
