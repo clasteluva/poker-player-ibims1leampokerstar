@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.46';
+    return '0.47';
   }
 
   static betRequest(gameState, bet) {
@@ -73,9 +73,9 @@ class Player {
     console.log("### sec card suit:"+my2Card.suit);
     if(my1Card.suit == my2Card.suit) {  //our cards have the same suit
       var sameSuitComCardsCounter = 0;
-      for(var card of comCards) {
-        if(card) {
-          if(card.suit == my1Card.suit) {
+      for(var cardy of comCards) {
+        if(cardy) {
+          if(cardy.suit == my1Card.suit) {
             sameSuitComCardsCounter++;
           }
         }
@@ -86,10 +86,6 @@ class Player {
         console.log("#### flush with two of ours");
       }
     }
-
-    
-
-
 
     console.log("### callValue: " + callValue);
     if(callValue > gameState.players[inAction].stack || ALL_IN == true) {
