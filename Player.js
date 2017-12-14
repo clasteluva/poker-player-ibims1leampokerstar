@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.43';
+    return '0.44';
   }
 
   static betRequest(gameState, bet) {
@@ -61,6 +61,20 @@ class Player {
 
       if(my1Card.suit == my2Card.suit) {
         callValue += 100;
+      }
+    }
+
+    
+    if(my1Card.suit == my2Card.suit) {  //our cards have the same suit
+      var sameSuitComCardsCounter = 0;
+      for(var card of comCards) {
+        if(card.suit == my1Card.suit) {
+          sameSuitComCardsCounter++;
+        }
+      }
+      if(sameSuitComCardsCounter >= 3) {
+        callValue += (100 + minimumRaise);
+        console.log("#### flush with two of ours");
       }
     }
 
