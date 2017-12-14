@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.58';
+    return '0.60';
   }
 
   static betRequest(gameState, bet) {
@@ -98,9 +98,14 @@ class Player {
       if(sameSuitComCardsCounter >= 3) {  //FLUSH with two of ours
         callValue += (100 + minimumRaise);
         console.log("#### flush with two of ours");
-
-        var Athere = false;
-
+      } else if(cardCount == 3) { //noch kein Flush, zweimal gleich Farbe bei uns und drei Karten beim Dealer
+        if(sameSuitComCardsCounter >= 2) {  //beim dealer sind mind. 2 karten unserer Farbe
+          callValue += minimumRaise;
+        } else {
+          callValue = 0;  //raus
+        }
+      } else if(cardCount == 4) {
+        callValue = 0;
       }
     }
 
