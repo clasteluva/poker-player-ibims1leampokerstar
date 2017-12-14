@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.27';
+    return '0.28';
   }
 
   static betRequest(gameState, bet) {
@@ -23,9 +23,19 @@ class Player {
         }
     } else {
       if(my1Card.rank <= 8 || my2Card.rank <= 8) {
-        
+
         console.log("### call is zerooo");
         callValue = 0;
+      }
+    }
+
+    if((my1Card.rank == 'A' && my2Card.rank == 'K') ||  (my2Card.rank == 'A' && my1Card.rank == 'K')) {
+      console.log("### A aaand K");
+      callValue += 50;
+
+      if(my1Card.suit == my2Card.suit) {
+        console.log("### A aaaaaand K saaame color");
+        callValue += 100;
       }
     }
 
