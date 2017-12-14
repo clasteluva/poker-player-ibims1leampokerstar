@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.55';
+    return '0.56';
   }
 
   static betRequest(gameState, bet) {
@@ -80,6 +80,7 @@ class Player {
     console.log("### first card suit:"+my1Card.suit);
     console.log("### sec card suit:"+my2Card.suit);
     if(my1Card.suit == my2Card.suit) {  //our cards have the same suit
+      console.log("##### our cards have the same suit");
       if(minimumRaise < 50) {
         callValue = minimumRaise;
         console.log("#### two cards same suit");
@@ -108,8 +109,8 @@ class Player {
       callValue = gameState.players[inAction].stack;
       console.log("#### all in, call value: "+callValue);
     }
-    console.log("our cards are "+my1Card.rank+" "+my2Card.suit+", "+my2Card.rank+" "+my2Card.suit);
-    console.log("We bet now: "+callValue+" our stack is: "+gameState.players[inAction].stack);
+    console.log("#### our cards are "+my1Card.rank+" "+my1Card.suit+", "+my2Card.rank+" "+my2Card.suit);
+    console.log("#### We bet now: "+callValue+" our stack is: "+gameState.players[inAction].stack);
     
     bet(callValue);
   }
