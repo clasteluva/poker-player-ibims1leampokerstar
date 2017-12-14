@@ -1,10 +1,12 @@
 class Player {
   static get VERSION() {
-    return '0.2';
+    return '0.21';
   }
 
   static betRequest(gameState, bet) {
-    bet(10);
+    console.log("gamestate: " + JSON.stringify(gameState));
+
+    bet(50);
   }
 
   static showdown(gameState) {
