@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.100';
+    return '0.101';
   }
 
   static betRequest(gameState, bet) {
@@ -9,7 +9,8 @@ class Player {
     var inAction = gameState["in_action"];
     var minimumRaise = gameState["minimum_raise"];
 
-    var callValue = gameState["current_buy_in"] - gameState["players"][inAction]["bet"];
+    var originalCallValue = gameState["current_buy_in"] - gameState["players"][inAction]["bet"];
+    var callValue = originalCallValue;
 
     var my1Card = gameState["players"][inAction]["hole_cards"][0];
     var my2Card = gameState["players"][inAction]["hole_cards"][1];
@@ -82,7 +83,9 @@ class Player {
     if(my1Card.suit == my2Card.suit) {  //our cards have the same suit
       console.log("##### our cards have the same suit");
       if(minimumRaise < 101) {
-        callValue += minimumRaise;
+        if(callValue < originalCallValue) {
+          callValue = originalCallValue;
+        }
         console.log("#### two cards same suit");
       }
       
