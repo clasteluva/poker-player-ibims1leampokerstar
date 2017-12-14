@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.50';
+    return '0.51';
   }
 
   static betRequest(gameState, bet) {
@@ -53,7 +53,12 @@ class Player {
             ALL_IN = true;
           }
         } else { // bad pair
-          callValue = 0;
+          if(minimumRaise <= gameState.players[inAction].stack) {
+            callValue = minimumRaise;
+          } else {
+            callValue = 0;
+          }
+          
         }
 
     } else if(my1Card.rank <= 10 || my2Card.rank <= 10) { //bad cards - no matter if 2 2 or 4 K
