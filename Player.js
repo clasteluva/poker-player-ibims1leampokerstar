@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '1.1';
+    return '1.3';
   }
 
   static betRequest(gameState, bet) {
@@ -58,9 +58,9 @@ class Player {
         console.log("#### zwilling/drilling/vierling: "+counter);
 
         if(counter == 3) {  //drilling
-          callValue += 250;
+          callValue += 100;
         } else if (counter == 4) {  //vierling
-          callValue += 500;
+          callValue += 400;
           ALL_IN = true;
         }
 
