@@ -6,7 +6,7 @@ class Player {
   static betRequest(gameState, bet) {
     console.log("gamestate: " + JSON.stringify(gameState));
 
-    bet(50);
+    bet(10);
   }
 
   static showdown(gameState) {
