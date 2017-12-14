@@ -17,6 +17,8 @@ class Player {
     var cardCount = gameState.community_cards.length;
     var comCards = new Array(5);
 
+    var ALL_IN = false;
+
     var i;
     for(i = 0; i < cardCount; i++) {
       console.log("### cardcount: " + cardCount);
@@ -64,7 +66,8 @@ class Player {
       }
     }
 
-    
+    console.log("### first card suit:"+my1Card.suit);
+    console.log("### sec card suit:"+my2Card.suit);
     if(my1Card.suit == my2Card.suit) {  //our cards have the same suit
       var sameSuitComCardsCounter = 0;
       for(var card of comCards) {
@@ -83,7 +86,7 @@ class Player {
 
 
     console.log("### callValue: " + callValue);
-    if(callValue > gameState.players[inAction].stack) {
+    if(callValue > gameState.players[inAction].stack || ALL_IN == true) {
       callValue = gameState.players[inAction].stack;
       console.log("#### all in");
     }
