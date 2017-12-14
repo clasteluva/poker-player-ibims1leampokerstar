@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.66';
+    return '0.100';
   }
 
   static betRequest(gameState, bet) {
@@ -34,33 +34,32 @@ class Player {
             callValue += 150;
           }
 
+          //check for 3 or 4
+          var counter = 2;
+          for(var card of comCards) {
+            if(card) {
+              if(card.rank == my1Card.rank) {
+                counter++;
+              }
+            }
+            
+          }
+          console.log("#### zwilling/drilling/vierling: "+counter);
+
+          if(counter == 3) {  //drilling
+            callValue += 50;
+          } else if (counter == 4) {  //vierling
+            callValue += 300;
+            ALL_IN = true;
+          }
         } else { // bad pair
           if(minimumRaise <= (gameState.players[inAction].stack / 2)) {
             console.log("#### bad pair mitgehen");
-            //callValue = minimumRaise;
+            callValue = minimumRaise;
           } else {
             callValue = 0;
           }
           
-        }
-
-        //check for 3 or 4
-        var counter = 2;
-        for(var card of comCards) {
-          if(card) {
-            if(card.rank == my1Card.rank) {
-              counter++;
-            }
-          }
-          
-        }
-        console.log("#### zwilling/drilling/vierling: "+counter);
-
-        if(counter == 3) {  //drilling
-          callValue += 50;
-        } else if (counter == 4) {  //vierling
-          callValue += 300;
-          ALL_IN = true;
         }
 
     } else if(my1Card.rank <= 10 || my2Card.rank <= 10) { //bad cards - no matter if 2 2 or 4 K
@@ -80,12 +79,11 @@ class Player {
 
     console.log("### first card suit:"+my1Card.suit);
     console.log("### sec card suit:"+my2Card.suit);
-    if(my1Card.suit == my2Card.suit) {  //our cards have the same suit - wir suchen nach einem Flush
-      console.log("---------- our cards have the same suit");
-      console.log("---------- our bet so far: "+gameState.players[inAction].bet+" our stack: "+gameState.players[inAction].stack);
-      if(minimumRaise < 101 && gameState.players[inAction].bet < (gameState.players[inAction].stack / 2)) {
+    if(my1Card.suit == my2Card.suit) {  //our cards have the same suit
+      console.log("##### our cards have the same suit");
+      if(minimumRaise < 101) {
         callValue += minimumRaise;
-        console.log("---------- two cards same suit");
+        console.log("#### two cards same suit");
       }
       
       var sameSuitComCardsCounter = 0;
@@ -100,67 +98,10 @@ class Player {
       if(sameSuitComCardsCounter >= 3) {  //FLUSH with two of ours
         callValue += (100 + minimumRaise);
         console.log("#### flush with two of ours");
-      } else if(cardCount == 3) { //noch kein Flush, zweimal gleich Farbe bei uns und drei Karten beim Dealer
-        console.log("#### noch kein Flush, zweimal gleiche Farbe bei uns, drei Karten beim Dealer");
-        if(sameSuitComCardsCounter >= 2) {  //beim dealer sind mind. 2 karten unserer Farbe
-          callValue += minimumRaise;
-          console.log("#### beim dealer mindestens 2 karten unserer farbe, wir gehen mit");
-        } else {
-          callValue = 0;  //raus
-          console.log("#### beim dealer sind weniger als 2 karten unserer farbe, wir gehen raus");
-        }
-      } else if(cardCount == 4) {
-        callValue = 0;
-        console.log("es sind vier dealer karten draußen, noch kein flush, wir gehen raus");
-      }
-    }
 
-    if(cardCount >= 3) {  //die ersten drei karten vom dealer sind raus
-      var sameRankCard1 = 0;
-      for(var cardo of comCards) {
-        if(cardo) {
-          if(my1Card.rank == cardo.rank) {
-            sameRankCard1++;
-          }
-        }
-        
-      }
-      var sameRankCard2 = 0;
-      for(var cardo2 of comCards) {
-        if(cardo2) {
-          if(my2Card.rank == cardo2.rank) {
-            sameRankCard2++;
-          }
-        }
-        
-      }
+        var Athere = false;
 
-      if(sameRankCard1 == 2 || sameRankCard2 == 2) {
-        callValue += minimumRaise;
-        if(sameRankCard1 == 2) {  //die erste Karte von uns kommt auch einmal beim dealer vor
-          callValue += 20;
-        }
-        if(sameRankCard2 == 2) { //die zweite Karte von uns kommt auch einmal beim dealer vor
-          callValue += 20;
-        }
       }
-      
-      if(sameRankCard1 == 2 && sameRankCard2 == 2) {  //zwei paare
-        callValue += 50;
-      }
-
-      if(sameRankCard1 == 3 || sameRankCard2 == 3) {  //drilling mit zwei karten vom dealer
-        callValue += (200 + minimumRaise);
-      }
-
-      if(sameRankCard1 == 4 || sameRankCard2 == 4) {  //vierling mit drei karten vom dealer
-        callValue += (400 + minimumRaise);
-      }
-
-      if((sameRankCard1 == 3 && sameRankCard2 == 2) || (sameRankCard2 == 3 && sameRankCard1 == 2)) {  //FULL HOUSE
-        ALL_IN = true;
-      }
-      
     }
 
     console.log("### callValue: " + callValue);
@@ -172,7 +113,6 @@ class Player {
     console.log("#### We bet now: "+callValue+" our stack is: "+gameState.players[inAction].stack);
     
     bet(callValue);
-    console.log("\n\n\n***********************************************")
   }
 
   static showdown(gameState) {
