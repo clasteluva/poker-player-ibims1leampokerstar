@@ -81,16 +81,18 @@ class Player {
       }  
     }
 
+
+
     console.log("### first card suit:"+my1Card.suit);
     console.log("### sec card suit:"+my2Card.suit);
     if(my1Card.suit == my2Card.suit) {  //our cards have the same suit
       console.log("##### our cards have the same suit");
-      if(minimumRaise < 101) {
+      //if(minimumRaise < 101) {
         if(callValue < originalCallValue) {
           callValue = originalCallValue;
         }
         console.log("#### two cards same suit");
-      }
+      //}
       
       var sameSuitComCardsCounter = 0;
       for(var cardy of comCards) {
@@ -107,6 +109,8 @@ class Player {
         ALL_IN = true;
       }
     }
+
+
 
     console.log("### callValue: " + callValue);
     if(callValue > gameState.players[inAction].stack || ALL_IN == true) {
