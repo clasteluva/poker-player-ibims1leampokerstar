@@ -11,6 +11,13 @@ class Player {
     console.log("inAction :" + inAction);
     console.log("callValue : " + callValue);
 
+    var my1Card = gameState["players"][inAction]["hole_cards"][0];
+    var my2Card = gameState["players"][inAction]["hole_cards"][1];
+
+    if(my1Card["rank"] == my2Card["rank"]) {
+        callValue += 50;
+    }
+
     bet(callValue);
   }
 
