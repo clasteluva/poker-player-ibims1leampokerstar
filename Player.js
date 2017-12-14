@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '1.3';
+    return '1.4';
   }
 
   static betRequest(gameState, bet) {
@@ -32,7 +32,7 @@ class Player {
         if(my1Card.rank > 8 ) { //good pair
           callValue += (50 + minimumRaise);
           if(my1Card["rank"] == "K" || my1Card["rank"] == "A" || my1Card["rank"] == "Q") { //very good pair
-            callValue += 150;
+            callValue += 300;
           }
           
         } else { // bad pair
@@ -72,11 +72,13 @@ class Player {
     // A UND K
     if((my1Card.rank == 'A' && my2Card.rank == 'K') ||  (my2Card.rank == 'A' && my1Card.rank == 'K')) {
       
-      callValue += (50 + minimumRaise);
-
-      if(my1Card.suit == my2Card.suit) {
-        callValue += 150;
-      }
+      if(cardCount < 3) {
+        callValue += (50 + minimumRaise);
+        
+        if(my1Card.suit == my2Card.suit) {
+          callValue += 150;
+        }
+      }  
     }
 
     console.log("### first card suit:"+my1Card.suit);
