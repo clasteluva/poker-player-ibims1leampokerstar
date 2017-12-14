@@ -15,27 +15,12 @@ class Player {
     var my2Card = gameState["players"][inAction]["hole_cards"][1];
 
     var cardCount = gameState.community_cards.length;
-    var com1;
-    var com2;
-    var com3;
-    var com4;
-    var com5;
+    var comCards = new Array[4];
 
     var i;
     for(i = 0; i < cardCount; i++) {
       console.log("### cardcount: " + cardCount);
-
-      if(cardCount > 0) {
-        com1 = gameState.community_cards[0];
-        com2 = gameState.community_cards[1];
-        com3 = gameState.community_cards[2];
-      }
-      if(cardCount > 3) {
-        com4 = gameState.community_cards[3];
-      }
-      if(cardCount > 4) {
-        com5 = gameState.community_cards[4];
-      }
+        comCards.push(gameState.community_cards[i]);
     }
 
     //PAIR
@@ -45,6 +30,21 @@ class Player {
           callValue += (50 + minimumRaise);
           if(my1Card["rank"] == "K" || my1Card["rank"] == "A" || my1Card["rank"] == "Q") { //very good pair
             callValue += 150;
+          }
+
+          //check for 3 or 4
+          var counter = 2;
+          for(var card of comCards) {
+            if(card.rank == my1Card.rank) {
+              counter++;
+            }
+          }
+          console.log("#### zwilling/drilling/vierling: "+counter);
+
+          if(counter == 3) {
+            callValue += 50;
+          } else if (counter == 4) {
+            callValue += 300;
           }
         }
     } 
