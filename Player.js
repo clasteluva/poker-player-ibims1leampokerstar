@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.48';
+    return '0.49';
   }
 
   static betRequest(gameState, bet) {
@@ -73,6 +73,11 @@ class Player {
     console.log("### first card suit:"+my1Card.suit);
     console.log("### sec card suit:"+my2Card.suit);
     if(my1Card.suit == my2Card.suit) {  //our cards have the same suit
+      if(minimumRaise < 50) {
+        callValue = minimumRaise;
+        console.log("#### two cards same suit");
+      }
+      
       var sameSuitComCardsCounter = 0;
       for(var cardy of comCards) {
         if(cardy) {
