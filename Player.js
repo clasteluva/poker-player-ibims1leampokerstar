@@ -1,10 +1,10 @@
 class Player {
   static get VERSION() {
-    return '0.1';
+    return '0.2';
   }
 
   static betRequest(gameState, bet) {
-    bet(0);
+    bet(10);
   }
 
   static showdown(gameState) {
