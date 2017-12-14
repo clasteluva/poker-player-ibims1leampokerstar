@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.47';
+    return '0.48';
   }
 
   static betRequest(gameState, bet) {
@@ -51,10 +51,11 @@ class Player {
           } else if (counter == 4) {
             callValue += 300;
           }
+        } else { // bad pair
+          callValue = 0;
         }
-    } 
 
-    if(my1Card.rank <= 8 || my2Card.rank <= 8) { //bad cards - no matter if 2 2 or 4 K
+    } else if(my1Card.rank <= 10 || my2Card.rank <= 10) { //bad cards - no matter if 2 2 or 4 K
       console.log("### call is zerooo");
       callValue = 0;
     }
