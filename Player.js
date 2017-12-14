@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.30';
+    return '0.31';
   }
 
   static betRequest(gameState, bet) {
@@ -10,20 +10,16 @@ class Player {
     var minimumRaise = gameState["minimum_raise"];
 
     var callValue = gameState["current_buy_in"] - gameState["players"][inAction]["bet"];
-    console.log("inAction :" + inAction);
-    console.log("callValue : " + callValue);
 
     var my1Card = gameState["players"][inAction]["hole_cards"][0];
     var my2Card = gameState["players"][inAction]["hole_cards"][1];
 
     //PAIR
     if(my1Card["rank"] == my2Card["rank"]) {
-        console.log("#### pair!!");
 
         if(my1Card.rank > 8 ) {
           callValue += (50 + minimumRaise);
           if(my1Card["rank"] == "K" || my1Card["rank"] == "A" || my1Card["rank"] == "Q") {
-            console.log("#### pair with KAQ");
             callValue += 150;
           }
         }
@@ -37,15 +33,15 @@ class Player {
 
     // A UND K
     if((my1Card.rank == 'A' && my2Card.rank == 'K') ||  (my2Card.rank == 'A' && my1Card.rank == 'K')) {
-      console.log("### A aaand K");
+      
       callValue += (50 + minimumRaise);
 
       if(my1Card.suit == my2Card.suit) {
-        console.log("### A aaaaaand K saaame color");
         callValue += 100;
       }
     }
 
+    console.log("### callValue: " + callValue);
     bet(callValue);
   }
 
