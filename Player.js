@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.26';
+    return '0.27';
   }
 
   static betRequest(gameState, bet) {
@@ -23,6 +23,7 @@ class Player {
         }
     } else {
       if(my1Card.rank <= 8 || my2Card.rank <= 8) {
+        
         console.log("### call is zerooo");
         callValue = 0;
       }
