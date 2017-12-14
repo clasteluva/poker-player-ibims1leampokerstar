@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.101';
+    return '0.102';
   }
 
   static betRequest(gameState, bet) {
@@ -101,6 +101,7 @@ class Player {
       if(sameSuitComCardsCounter >= 3) {  //FLUSH with two of ours
         callValue += (100 + minimumRaise);
         console.log("#### flush with two of ours");
+        ALL_IN = true;
 
         var Athere = false;
 
@@ -115,6 +116,10 @@ class Player {
     console.log("#### our cards are "+my1Card.rank+" "+my1Card.suit+", "+my2Card.rank+" "+my2Card.suit);
     console.log("#### We bet now: "+callValue+" our stack is: "+gameState.players[inAction].stack);
     
+    if(ALL_IN == false && ((gameState.players[inAction].stack - callValue) <= 200)) {
+      callValue = 0;
+    }
+
     bet(callValue);
   }
 
