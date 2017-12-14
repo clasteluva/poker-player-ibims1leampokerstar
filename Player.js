@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '1.4';
+    return '1.5';
   }
 
   static betRequest(gameState, bet) {
@@ -38,7 +38,7 @@ class Player {
         } else { // bad pair
           if(minimumRaise <= (gameState.players[inAction].stack / 2)) {
             console.log("#### bad pair mitgehen");
-            callValue = minimumRaise;
+            callValue += minimumRaise;
           } else {
             callValue = 0;
           }
