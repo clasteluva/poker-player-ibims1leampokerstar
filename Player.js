@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.24';
+    return '0.25';
   }
 
   static betRequest(gameState, bet) {
@@ -17,6 +17,10 @@ class Player {
     if(my1Card["rank"] == my2Card["rank"]) {
         console.log("#### pair!!");
         callValue += 50;
+        if(my1Card["rank"] == "K" || my1Card["rank"] == "A" || my1Card["rank"] == "Q") {
+          console.log("#### pair with KAQ");
+          callValue += 150;
+        }
     }
 
     bet(callValue);
