@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.45';
+    return '0.46';
   }
 
   static betRequest(gameState, bet) {
@@ -37,9 +37,12 @@ class Player {
           //check for 3 or 4
           var counter = 2;
           for(var card of comCards) {
-            if(card.rank == my1Card.rank) {
-              counter++;
+            if(card) {
+              if(card.rank == my1Card.rank) {
+                counter++;
+              }
             }
+            
           }
           console.log("#### zwilling/drilling/vierling: "+counter);
 
