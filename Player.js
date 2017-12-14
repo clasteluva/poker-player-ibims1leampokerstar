@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.23';
+    return '0.24';
   }
 
   static betRequest(gameState, bet) {
@@ -15,6 +15,7 @@ class Player {
     var my2Card = gameState["players"][inAction]["hole_cards"][1];
 
     if(my1Card["rank"] == my2Card["rank"]) {
+        console.log("#### pair!!");
         callValue += 50;
     }
 
