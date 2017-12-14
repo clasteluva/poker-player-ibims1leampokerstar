@@ -68,12 +68,15 @@ class Player {
 
     console.log("### first card suit:"+my1Card.suit);
     console.log("### sec card suit:"+my2Card.suit);
-    /*if(my1Card.suit == my2Card.suit) {  //our cards have the same suit
+    if(my1Card.suit == my2Card.suit) {  //our cards have the same suit
       var sameSuitComCardsCounter = 0;
       for(var card of comCards) {
-        if(card.suit == my1Card.suit) {
-          sameSuitComCardsCounter++;
+        if(card) {
+          if(card.suit == my1Card.suit) {
+            sameSuitComCardsCounter++;
+          }
         }
+        
       }
       if(sameSuitComCardsCounter >= 3) {
         callValue += (100 + minimumRaise);
@@ -83,7 +86,7 @@ class Player {
 
     
 
-*/
+
 
     console.log("### callValue: " + callValue);
     if(callValue > gameState.players[inAction].stack || ALL_IN == true) {
