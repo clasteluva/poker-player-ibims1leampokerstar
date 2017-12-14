@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.61';
+    return '0.62';
   }
 
   static betRequest(gameState, bet) {
@@ -79,7 +79,7 @@ class Player {
 
     console.log("### first card suit:"+my1Card.suit);
     console.log("### sec card suit:"+my2Card.suit);
-    if(my1Card.suit == my2Card.suit) {  //our cards have the same suit
+    if(my1Card.suit == my2Card.suit) {  //our cards have the same suit - wir suchen nach einem Flush
       console.log("##### our cards have the same suit");
       if(minimumRaise < 101) {
         callValue += minimumRaise;
@@ -111,6 +111,54 @@ class Player {
         callValue = 0;
         console.log("es sind vier dealer karten draußen, noch kein flush, wir gehen raus");
       }
+    }
+
+    if(cardCount >= 3) {  //die ersten drei karten vom dealer sind raus
+      var sameRankCard1 = 0;
+      for(var cardo of comCards) {
+        if(cardo) {
+          if(my1Card.rank == cardo.rank) {
+            sameRankCard1++;
+          }
+        }
+        
+      }
+      var sameRankCard2 = 0;
+      for(var cardo2 of comCards) {
+        if(cardo2) {
+          if(my2Card.rank == cardo2.rank) {
+            sameRankCard2++;
+          }
+        }
+        
+      }
+
+      if(sameRankCard1 == 2 || sameRankCard2 == 2) {
+        callValue += minimumRaise;
+        if(sameRankCard1 == 2) {  //die erste Karte von uns kommt auch einmal beim dealer vor
+          callValue += 20;
+        }
+        if(sameRankCard2 == 2) { //die zweite Karte von uns kommt auch einmal beim dealer vor
+          callValue += 20;
+        }
+      }
+      
+      if(sameRankCard1 == 2 && sameRankCard2 == 2) {  //zwei paare
+        callValue += 50;
+      }
+
+      if(sameRankCard1 == 3 || sameRankCard2 == 3) {  //drilling mit zwei karten vom dealer
+        callValue += (200 + minimumRaise);
+      }
+
+      if(sameRankCard1 == 4 || sameRankCard2 == 4) {  //vierling mit drei karten vom dealer
+        callValue += (400 + minimumRaise);
+      }
+
+      if((sameRankCard1 == 3 && sameRankCard2 == 2) || (sameRankCard2 == 3 && sameRankCard1 == 2)) {  //FULL HOUSE
+        ALL_IN = true;
+      }
+      
     }
 
     console.log("### callValue: " + callValue);
