@@ -14,6 +14,30 @@ class Player {
     var my1Card = gameState["players"][inAction]["hole_cards"][0];
     var my2Card = gameState["players"][inAction]["hole_cards"][1];
 
+    var cardCount = gameState.community_cards.length;
+    var com1;
+    var com2;
+    var com3;
+    var com4;
+    var com5;
+
+    var i;
+    for(i = 0; i < cardCount; i++) {
+      console.log("### cardcount: " + cardCount);
+
+      if(cardCount > 0) {
+        com1 = gameState.community_cards[0];
+        com2 = gameState.community_cards[1];
+        com3 = gameState.community_cards[2];
+      }
+      if(cardCount > 3) {
+        com4 = gameState.community_cards[3];
+      }
+      if(cardCount > 4) {
+        com5 = gameState.community_cards[4];
+      }
+    }
+
     //PAIR
     if(my1Card["rank"] == my2Card["rank"]) {
 
@@ -40,28 +64,9 @@ class Player {
       }
     }
 
-    var cardCount = gameState.community_cards.length;
-    var com1;
-    var com2;
-    var com3;
-    var com4;
-    var com5;
+    
 
-    for(i = 0; i < cardCount; i++) {
-      console.log("### cardcount: " + cardCount);
 
-      if(cardCount > 0) {
-        com1 = gameState.community_cards[0];
-        com2 = gameState.community_cards[1];
-        com3 = gameState.community_cards[2];
-      }
-      if(cardCount > 3) {
-        com4 = gameState.community_cards[3];
-      }
-      if(cardCount > 4) {
-        com5 = gameState.community_cards[4];
-      }
-    }
 
     console.log("### callValue: " + callValue);
     bet(callValue);
