@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.64';
+    return '0.65';
   }
 
   static betRequest(gameState, bet) {
@@ -63,10 +63,6 @@ class Player {
           ALL_IN = true;
         }
 
-        
-
-
-
     } else if(my1Card.rank <= 10 || my2Card.rank <= 10) { //bad cards - no matter if 2 2 or 4 K
       console.log("### call is zerooo");
       callValue = 0;
@@ -85,10 +81,11 @@ class Player {
     console.log("### first card suit:"+my1Card.suit);
     console.log("### sec card suit:"+my2Card.suit);
     if(my1Card.suit == my2Card.suit) {  //our cards have the same suit - wir suchen nach einem Flush
-      console.log("##### our cards have the same suit");
+      console.log("---------- our cards have the same suit");
+      console.log("---------- our bet so far: "+gameState.players[inAction].bet+" our stack: "+gameState.players[inAction].stack);
       if(minimumRaise < 101 && gameState.players[inAction].bet < (gameState.players[inAction].stack / 2)) {
         callValue += minimumRaise;
-        console.log("#### two cards same suit");
+        console.log("---------- two cards same suit");
       }
       
       var sameSuitComCardsCounter = 0;
