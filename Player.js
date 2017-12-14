@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.32';
+    return '0.42';
   }
 
   static betRequest(gameState, bet) {
@@ -71,6 +71,7 @@ class Player {
     console.log("### callValue: " + callValue);
     if(callValue > gameState.players[inAction].stack) {
       callValue = gameState.players[inAction].stack;
+      console.log("#### all in");
     }
     bet(callValue);
   }
