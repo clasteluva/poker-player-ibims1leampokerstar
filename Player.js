@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.57';
+    return '0.58';
   }
 
   static betRequest(gameState, bet) {
@@ -81,7 +81,7 @@ class Player {
     console.log("### sec card suit:"+my2Card.suit);
     if(my1Card.suit == my2Card.suit) {  //our cards have the same suit
       console.log("##### our cards have the same suit");
-      if(minimumRaise < 50) {
+      if(minimumRaise < 101) {
         callValue += minimumRaise;
         console.log("#### two cards same suit");
       }
