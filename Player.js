@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.107';
+    return '1.0';
   }
 
   static betRequest(gameState, bet) {
@@ -121,7 +121,8 @@ class Player {
       callValue = 0;
     }*/
 
-    bet(callValue);
+    //bet(callValue);
+    bet(0)
   }
 
   static showdown(gameState) {
