@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.52';
+    return '0.53';
   }
 
   static betRequest(gameState, bet) {
@@ -94,16 +94,19 @@ class Player {
         }
         
       }
-      if(sameSuitComCardsCounter >= 3) {
+      if(sameSuitComCardsCounter >= 3) {  //FLUSH with two of ours
         callValue += (100 + minimumRaise);
         console.log("#### flush with two of ours");
+
+        var Athere = false;
+
       }
     }
 
     console.log("### callValue: " + callValue);
     if(callValue > gameState.players[inAction].stack || ALL_IN == true) {
       callValue = gameState.players[inAction].stack;
-      console.log("#### all in");
+      console.log("#### all in, call value: "+callValue);
     }
     bet(callValue);
   }
