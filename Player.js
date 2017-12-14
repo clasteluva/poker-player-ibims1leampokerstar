@@ -34,25 +34,7 @@ class Player {
           if(my1Card["rank"] == "K" || my1Card["rank"] == "A" || my1Card["rank"] == "Q") { //very good pair
             callValue += 150;
           }
-
-          //check for 3 or 4
-          var counter = 2;
-          for(var card of comCards) {
-            if(card) {
-              if(card.rank == my1Card.rank) {
-                counter++;
-              }
-            }
-            
-          }
-          console.log("#### zwilling/drilling/vierling: "+counter);
-
-          if(counter == 3) {  //drilling
-            callValue += 250;
-          } else if (counter == 4) {  //vierling
-            callValue += 500;
-            ALL_IN = true;
-          }
+          
         } else { // bad pair
           if(minimumRaise <= (gameState.players[inAction].stack / 2)) {
             console.log("#### bad pair mitgehen");
@@ -61,6 +43,25 @@ class Player {
             callValue = 0;
           }
           
+        }
+
+        //check for 3 or 4
+        var counter = 2;
+        for(var card of comCards) {
+          if(card) {
+            if(card.rank == my1Card.rank) {
+              counter++;
+            }
+          }
+          
+        }
+        console.log("#### zwilling/drilling/vierling: "+counter);
+
+        if(counter == 3) {  //drilling
+          callValue += 250;
+        } else if (counter == 4) {  //vierling
+          callValue += 500;
+          ALL_IN = true;
         }
 
     } else if(my1Card.rank <= 10 || my2Card.rank <= 10) { //bad cards - no matter if 2 2 or 4 K
@@ -102,9 +103,6 @@ class Player {
         callValue += (100 + minimumRaise);
         console.log("#### flush with two of ours");
         ALL_IN = true;
-
-        var Athere = false;
-
       }
     }
 
@@ -113,13 +111,6 @@ class Player {
       callValue = gameState.players[inAction].stack;
       console.log("#### all in, call value: "+callValue);
     }
-    console.log("#### our cards are "+my1Card.rank+" "+my1Card.suit+", "+my2Card.rank+" "+my2Card.suit);
-    console.log("#### We bet now: "+callValue+" our stack is: "+gameState.players[inAction].stack+" stack-callvalue "+gameState.players[inAction].stack - callValue);
-    
-    /*if(ALL_IN == false && ((gameState.players[inAction].stack - callValue) <= 200)) {
-      console.log("##### wir haben zu wenig geld");
-      callValue = 0;
-    }*/
 
     bet(callValue);
 
