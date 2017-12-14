@@ -1,6 +1,6 @@
 class Player {
   static get VERSION() {
-    return '0.60';
+    return '0.61';
   }
 
   static betRequest(gameState, bet) {
@@ -99,13 +99,17 @@ class Player {
         callValue += (100 + minimumRaise);
         console.log("#### flush with two of ours");
       } else if(cardCount == 3) { //noch kein Flush, zweimal gleich Farbe bei uns und drei Karten beim Dealer
+        console.log("#### noch kein Flush, zweimal gleiche Farbe bei uns, drei Karten beim Dealer");
         if(sameSuitComCardsCounter >= 2) {  //beim dealer sind mind. 2 karten unserer Farbe
           callValue += minimumRaise;
+          console.log("#### beim dealer mindestens 2 karten unserer farbe, wir gehen mit");
         } else {
           callValue = 0;  //raus
+          console.log("#### beim dealer sind weniger als 2 karten unserer farbe, wir gehen raus");
         }
       } else if(cardCount == 4) {
         callValue = 0;
+        console.log("es sind vier dealer karten draußen, noch kein flush, wir gehen raus");
       }
     }
 
