@@ -69,6 +69,9 @@ class Player {
 
 
     console.log("### callValue: " + callValue);
+    if(callValue > gameState.players[inAction].stack) {
+      callValue = gameState.players[inAction].stack;
+    }
     bet(callValue);
   }
 
