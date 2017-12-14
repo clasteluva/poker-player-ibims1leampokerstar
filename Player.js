@@ -21,6 +21,11 @@ class Player {
           console.log("#### pair with KAQ");
           callValue += 150;
         }
+    } else {
+      if(my1Card.rank <= 8) {
+        console.log("### call is zerooo");
+        callValue = 0;
+      }
     }
 
     bet(callValue);
